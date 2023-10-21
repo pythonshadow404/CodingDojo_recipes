@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    {#<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">#}
+    <title>Let's Cook: Login and Register</title>
 </head>
 <body>
-    
     <div id="wrapper">
         <div id="nav">
-            <h1>Recipes Database</h1>
+            <h1>Recipe Share</h1>
         </div>
-        {#Validation Section#}
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <p class="red_text">{{messages}}</p>
-        {%endfor%}
-        {%endif%}
-        {%endwith%}
-        <div class = "content">
-            <div id="register">
+        {% with messages = get_flashed_messages(category_filter=['register']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="red_text">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="content">
+            <div class="box"  id="register">
+                <h2>Register</h2>
+                <form action="/register" method="POST">
                 <div>
                     <label for="first_name">First Name: </label>
                     <input type="text" name="first_name">
                 </div>
                 <div>
-                    <label for="last_name">Last Name: </label>
+                    <label for="last_name">Last Name</label>
                     <input type="text" name="last_name">
                 </div>
                 <div>
@@ -38,25 +39,34 @@
                     <input type="password" name="password">
                 </div>
                 <div>
-                    <label for="confirm">Confirm Password: </label>
+                    <label for="confirm">Confirm Password</label>
                     <input type="password" name="confirm">
                 </div>
-                <input type="submit" value = "Register">
+                <input type="submit" value="Register">
+                </form>
             </div>
-            <div id="login">
-                <div>
-                    <label for="email">Email: </label>
-                    <input type="email" name="email">
-                </div>
-                <div>
-                    <label for="password">Password: </label>
-                    <input type="password" name="password">
-                </div>
-                <input type="submit" value="Login">
+            <div class="box" id="login">
+                <h2>Login</h2>
+                <form action="/login" method="POST">
+                    {% with messages = get_flashed_messages(category_filter=['login']) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="red_text">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div>
+                        <label for="email">Email: </label>
+                        <input type="email" name="email">
+                    </div>
+                    <div>
+                        <label for="password">Password: </label>
+                        <input type="password" name="password">
+                    </div>
+                    <input type="submit" value="Login">
+                </form>
             </div>
-        </div>
-
     </div>
-
+    
 </body>
 </html>
