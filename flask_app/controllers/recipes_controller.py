@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, request, flash
 from flask_app import app
-from flask_app.models.user import User
-from flask_app.models.recipe import Recipe
+from flask_app.models.user_model import User
+from flask_app.models.recipe_model import Recipe
 
 #from flask_app.models.recipe import Recipe
 
