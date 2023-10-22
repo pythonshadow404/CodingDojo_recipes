@@ -54,7 +54,7 @@ def create_recipe():
     print("In the create process POST route: ", request.form)
     # Before we save...the information
     # Pass the form data into a validator (55:00)
-    is_valid = Recipe.is_valid(request.form)
+    is_valid = Recipe.validate_recipe(request.form)
     print('#############################')
     print(is_valid)
     # If the form info data is good... then save and go to the dashboard
@@ -68,7 +68,7 @@ def create_recipe():
 @app.route('/recipes', methods =['POST'])
 def update_recipe():
     print("In update POST route: ", request.form)
-    is_valid = Recipe.is_valid(request.form)
+    is_valid = Recipe.validate_recipe(request.form)
     # If the form info data is good... then save and go to the dashboard
     if is_valid:
         Recipe.update(request.form)

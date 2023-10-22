@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Create New Recipe</title>
+</head>
+<body>
+    <div class="container grey">
+        {%with messages = get_flashed_messages() %}
+        {% for message in messages: %}
+        <p class="error"> {{message}} </p>
+        {% endfor %}
+        {%endwith%}
+
+        <div class="flex-container">
+            <h1 class="majority-width">Add a New Recipe</h1>
+            <div>
+                <a href="/dashboard">back to recipes</a>
+                <a href="/logout">logout</a>
+            </div>
+        </div>
+        <div>
+
+        </div>
+
+        <form action="/recipes" method="post" 
+        class="flex-container with-border majority-width">
+        <div class="half-width">
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" class="form-label">
+            </div>
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" name="description" class="form-label">
+            </div>
+            <div class="form-group">
+                <label for="instructions" class="form-label">Instructions</label>
+                <input type="text" name="instructions" class="form-label">
+            </div>
+        </div>
+
+        <div class="half-width">
+            <div class="form-group">
+                <label for="date_made" class="form-label"></label>
+                <input type="date" class="form-control" name="date_made">
+            </div>
+            <div class="form-group">
+                <p>Under 30 min?</p>
+                <label for="yes" class="form-label">Yes</label>
+                <input type="radio" name="under_30" value="1">
+                <label for="no" class="form-label">No</label>
+                <input type="radio" name="under_30" value="0">
+            </div>
+            <input type="hidden" name="user_id" value="{{session.user_id}}">
+            <div class="form-group">
+                <input type="submit" class="btn-primary">
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>
